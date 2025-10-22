@@ -163,8 +163,6 @@ def calculate_hexagon_centers(n: int, canvas_size: int) -> list:
         y = round(y * 2) / 2
         centers.append((x, y))
 
-    print(centers)
-
     return centers
 
 
@@ -449,3 +447,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
