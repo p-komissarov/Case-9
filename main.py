@@ -442,10 +442,12 @@ def main() -> None:
         draw_hexagon((x, y), fill_color, side_length)
         
     turtle.update()
+    turtle.hideturtle()
     turtle.exitonclick()
 
 
 if __name__ == "__main__":
     main()
+
 
 
