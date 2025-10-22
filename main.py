@@ -401,6 +401,7 @@ def draw_hexagon(center: tuple, color: str, side_length: float) -> None:
     border_t.hideturtle()
     t.hideturtle()
 
+
 def main() -> None:
 
     """
@@ -443,6 +444,8 @@ def main() -> None:
     turtle.update()
     turtle.exitonclick()
 
+
 if __name__ == "__main__":
     main()
+
 
