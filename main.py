@@ -355,8 +355,7 @@ def draw_hexagon(center: tuple, color: str, side_length: float) -> None:
     
     shadow_color = f'#{r:02x}{g:02x}{b:02x}'
     
-    t = turtle.Turtle()
-    t.speed(0) 
+    t = turtle.Turtle() 
     t.penup()
     t.goto(x, y)
     t.pendown()
@@ -372,7 +371,6 @@ def draw_hexagon(center: tuple, color: str, side_length: float) -> None:
     t.end_fill()
 
     shadow_t = turtle.Turtle()
-    shadow_t.speed(0)
     shadow_t.penup()
     shadow_t.goto(x, y)
     shadow_t.pendown()
@@ -388,7 +386,6 @@ def draw_hexagon(center: tuple, color: str, side_length: float) -> None:
     shadow_t.hideturtle()
     
     border_t = turtle.Turtle()
-    border_t.speed(0)
     border_t.penup()
     border_t.goto(x, y)
     border_t.pendown()
@@ -426,11 +423,8 @@ def main() -> None:
     screen = turtle.Screen()
     screen.setup(canvas_size, canvas_size)
     screen.title(ru.WELCOME_MESSAGE)
-
-    artist = turtle.Turtle()
-    artist.speed(0)
-    artist.hideturtle()
-
+    screen.tracer(0, 0)
+    
     for index, (x, y) in enumerate(centers):
         row = index // n
         col = index % n
@@ -445,8 +439,10 @@ def main() -> None:
             fill_color = get_random_color(color1_hex, color2_hex)
 
         draw_hexagon((x, y), fill_color, side_length)
-
-    turtle.done()
+        
+    turtle.update()
+    turtle.exitonclick()
 
 if __name__ == "__main__":
     main()
+
