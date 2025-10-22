@@ -5,6 +5,7 @@ import random
 import webcolors
 import ru_local as ru
 
+
 def get_color_choice() -> str:
     
     """
@@ -448,6 +449,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-
-
