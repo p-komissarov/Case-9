@@ -162,73 +162,9 @@ def calculate_hexagon_centers(n: int, canvas_size: int) -> list:
         y = round(y * 2) / 2
         centers.append((x, y))
 
+    print(centers)
+
     return centers
-
-def draw_hexagon(x: float, y: float, color: str, side_length: float):
-    
-    """
-    Animated drawing of a single hexagon with 3D effect.
-    Args:
-        center (tuple): (x, y) coordinates of the hexagon center
-        color (str): Color of the hexagon in HEX format
-        side_length (float): Length of the hexagon side
-    Returns:
-        None
-    """
-    
-    r = int(color[1:3], 16)
-    g = int(color[3:5], 16)
-    b = int(color[5:7], 16)
-    
-    r = int(r * 0.7)
-    g = int(g * 0.7) 
-    b = int(b * 0.7)
-    
-    r = max(0, min(255, r))
-    g = max(0, min(255, g))
-    b = max(0, min(255, b))
-    
-    shadow_color = f'#{r:02x}{g:02x}{b:02x}'
-    
-    t = turtle.Turtle()
-    t.speed(1) 
-    t.penup()
-    t.goto(x, y)
-    t.pendown()
-    t.color("black", color)
-    t.begin_fill()
-    
-    for _ in range(6):
-        t.forward(side_length)
-        t.left(60)
-    
-    t.end_fill()
-    
-    t.penup()
-    t.goto(x, y)
-    t.pendown()
-    t.color(shadow_color)
-    t.pensize(2)
-    
-    for j in range(3):
-        t.forward(side_length)
-        t.left(60)
-    
-    t.hideturtle()
-    
-    border_t = turtle.Turtle()
-    border_t.speed(1)  
-    border_t.penup()
-    border_t.goto(x, y)
-    border_t.pendown()
-    border_t.color("black")
-    border_t.pensize(1)
-
-    for _ in range(6):
-        border_t.forward(side_length)
-        border_t.left(60)
-    
-    border_t.hideturtle()
 
 
 def name_to_hex(name: str) -> str:
@@ -393,7 +329,82 @@ def get_random_color(color1_hex: str, color2_hex: str) -> str:
     return random.choice([color1_hex, color2_hex])
 
 
-def main():
+def draw_hexagon(center: tuple, color: str, side_length: float) -> None:
+    
+    """
+    Animated drawing of a single hexagon with 3D effect.
+    Args:
+        center (tuple): (x, y) coordinates of the hexagon center
+        color (str): Color of the hexagon in HEX format
+        side_length (float): Length of the hexagon side
+    """
+    
+    x, y = center
+    
+    r = int(color[1:3], 16)
+    g = int(color[3:5], 16)
+    b = int(color[5:7], 16)
+    
+    r = int(r * 0.7)
+    g = int(g * 0.7) 
+    b = int(b * 0.7)
+    
+    r = max(0, min(255, r))
+    g = max(0, min(255, g))
+    b = max(0, min(255, b))
+    
+    shadow_color = f'#{r:02x}{g:02x}{b:02x}'
+    
+    t = turtle.Turtle()
+    t.speed(0) 
+    t.penup()
+    t.goto(x, y)
+    t.pendown()
+    t.color("black", color)
+    t.begin_fill()
+    
+    t.left(30)
+    
+    for _ in range(6):
+        t.forward(side_length)
+        t.left(60)
+    
+    t.end_fill()
+
+    shadow_t = turtle.Turtle()
+    shadow_t.speed(0)
+    shadow_t.penup()
+    shadow_t.goto(x, y)
+    shadow_t.pendown()
+    shadow_t.color(shadow_color)
+    shadow_t.pensize(2)
+
+    shadow_t.left(30)
+    
+    for j in range(3):
+        shadow_t.forward(side_length)
+        shadow_t.left(60)
+    
+    shadow_t.hideturtle()
+    
+    border_t = turtle.Turtle()
+    border_t.speed(0)
+    border_t.penup()
+    border_t.goto(x, y)
+    border_t.pendown()
+    border_t.color("black")
+    border_t.pensize(1)
+    
+    border_t.left(30)
+    
+    for _ in range(6):
+        border_t.forward(side_length)
+        border_t.left(60)
+    
+    border_t.hideturtle()
+    t.hideturtle()
+
+def main() -> None:
 
     """
     Main function to run the hexagon art generator.
@@ -433,10 +444,9 @@ def main():
         elif mode == "4":
             fill_color = get_random_color(color1_hex, color2_hex)
 
-        draw_hexagon(x, y, side_length, fill_color)
+        draw_hexagon((x, y), fill_color, side_length)
 
     turtle.done()
 
 if __name__ == "__main__":
-
     main()
